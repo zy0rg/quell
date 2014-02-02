@@ -1,0 +1,327 @@
+body {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: black;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	line-height: 0;
+}
+
+.vertical-aligner {
+	height: 100%;
+	width: 0;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.counter {
+	color: white;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 20px;
+	line-height: 20px;
+}
+
+.solution {
+	text-align: left;
+	color: red;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	font-size: 20px;
+	line-height: 20px;
+}
+
+.field {
+	display: inline-block;
+	vertical-align: middle;
+	background: #111;
+}
+
+.row {
+	/*display: inline-block;*/
+}
+
+.cell {
+	display: inline-block;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	font-size: 16px;
+	overflow: hidden;
+}
+
+.b1:after,
+.b2:after,
+.b3:after,
+.b4:after {
+	color: black;
+	position: absolute;
+	line-height: 14px;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: monospace;
+	text-align: center;
+	width: 18px;
+	height: 18px;
+	top: 2px;
+	left: 0;
+}
+
+.b1.current:after,
+.b2.current:after,
+.b3.current:after,
+.b4.current:after {
+	width: 16px;
+	top: 1px;
+}
+
+.b1:after {
+	content: "1";
+}
+
+.b2:after {
+	content: "2";
+}
+
+.b3:after {
+	content: "3";
+}
+
+.b4:after {
+	content: "4";
+}
+
+.cell.vacuum {
+	background: black;
+}
+
+.cell.wall {
+	background: white;
+}
+
+.cell.breakable {
+	background: yellow;
+}
+
+.cell.yring {
+	width: 12px;
+	height: 12px;
+	border-radius: 9px;
+	border: 3px solid yellow;
+	margin: 1px;
+}
+
+.cell.ball,
+.cell.bball,
+.cell.yball,
+.cell.rball {
+	width: 18px;
+	height: 18px;
+	border-radius: 9px;
+	margin: 1px;
+	background: lightblue;
+}
+
+.cell.yball {
+	background: yellow;
+}
+
+.cell.rball {
+	background: red;
+}
+
+.cell.ball.current,
+.cell.bball.current,
+.cell.yball.current {
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+}
+
+.cell.ball.current,
+.cell.bball.current {
+	background: lightskyblue;
+	border: 1px solid blue;
+}
+
+.cell.yball.current {
+	background: #eeee33;
+	border: 1px solid yellow;
+}
+
+.cell.pearl,
+.cell.ypearl {
+	width: 12px;
+	height: 12px;
+	border-radius: 6px;
+	margin: 4px;
+	background: lightgray;
+}
+
+.cell.ypearl {
+	background: yellow;
+}
+
+.cell.rspike,
+.cell.lspike,
+.cell.dspike,
+.cell.uspike,
+.cell.rwspike,
+.cell.lwspike,
+.cell.dwspike,
+.cell.uwspike,
+.right,
+.left,
+.up,
+.down {
+	width: 0;
+	height: 0;
+	color: black;
+}
+
+.right,
+.cell.rspike,
+.cell.rwspike {
+	border-bottom: 10px solid transparent;
+	border-top: 10px solid transparent;
+	border-left: 20px solid red;
+}
+
+.left,
+.cell.lspike,
+.cell.lwspike {
+	border-bottom: 10px solid transparent;
+	border-top: 10px solid transparent;
+	border-right: 20px solid red;
+}
+
+.down,
+.cell.dspike,
+.cell.dwspike {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 20px solid red;
+}
+
+.up,
+.cell.uspike,
+.cell.uwspike {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 20px solid red;
+}
+
+.cell.mspike {
+	width: 14px;
+	height: 14px;
+	margin: 3px;
+	background: red;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+}
+
+.cell.rwspike {
+	border-left-color: #c93;
+}
+
+.cell.lwspike {
+	border-right-color: #c93;
+}
+
+.cell.dwspike {
+	border-top-color: #c93;
+}
+
+.cell.uwspike {
+	border-bottom-color: #c93;
+}
+
+.left,
+.right,
+.down,
+.up {
+	display: inline-block;
+	margin: 2px;
+	position: relative;
+	vertical-align: top;
+}
+
+.left span,
+.right span,
+.down span,
+.up span {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	top: -10px;
+	left: 0;
+	font-size: 16px;
+}
+
+.right {
+	border-left-color: white;
+}
+
+.right span {
+	text-align: left;
+	left: -20px;
+}
+
+.left {
+	border-right-color: white;
+}
+
+.left span {
+	text-align: right;
+}
+
+.down {
+	border-top-color: white;
+}
+
+.down span {
+	top: -23px;
+	left: -10px;
+	text-align: center;
+}
+
+.up {
+	border-bottom-color: white;
+}
+
+.up span {
+	top: 3px;
+	left: -10px;
+	text-align: center;
+}
+
+.cell.box {
+	width: 16px;
+	height: 16px;
+	margin: 2px;
+	border-radius: 2px;
+	background: #c93;
+}
+
+.cell.bush {
+	width: 8px;
+	height: 8px;
+	margin: 6px;
+	border-radius: 4px;
+	background: darkgreen;
+}
+
+.cell.wbush {
+	width: 18px;
+	height: 18px;
+	margin: 1px;
+	border-radius: 1px;
+	background: darkgreen;
+}
