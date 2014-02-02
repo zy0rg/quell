@@ -1,4 +1,5 @@
 body {
+	font-family: monospace;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -23,6 +24,7 @@ body {
 	left: 10px;
 	font-size: 20px;
 	line-height: 20px;
+	text-align: left;
 }
 
 .solution {
@@ -64,7 +66,6 @@ body {
 	line-height: 14px;
 	font-size: 12px;
 	font-weight: bold;
-	font-family: monospace;
 	text-align: center;
 	width: 18px;
 	height: 18px;
@@ -100,62 +101,62 @@ body {
 	background: black;
 }
 
-.cell.wall {
+.wall {
 	background: white;
 }
 
-.cell.breakable {
-	background: yellow;
-}
-
-.cell.yring {
+.ring {
 	width: 12px;
 	height: 12px;
 	border-radius: 9px;
-	border: 3px solid yellow;
+	border: 3px solid lightgray;
 	margin: 1px;
 }
 
-.cell.ball,
-.cell.bball,
-.cell.yball,
-.cell.rball {
+.cell.ring.yellow {
+	background: transparent;
+	border: 3px solid yellow;
+}
+
+.tumbler {
+	width: 6px;
+	height: 6px;
+	margin: 7px;
+	background: #f70;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+}
+
+.cell.ball {
 	width: 18px;
 	height: 18px;
 	border-radius: 9px;
 	margin: 1px;
 	background: lightblue;
+	transform: initial;
+	-webkit-transform: initial;
+	-moz-transform: initial;
 }
 
-.cell.yball {
-	background: yellow;
-}
-
-.cell.rball {
+.ball.red {
 	background: red;
 }
 
-.cell.ball.current,
-.cell.bball.current,
-.cell.yball.current {
+.cell.ball.current {
 	width: 16px;
 	height: 16px;
 	line-height: 16px;
-}
-
-.cell.ball.current,
-.cell.bball.current {
 	background: lightskyblue;
 	border: 1px solid blue;
 }
 
-.cell.yball.current {
-	background: #eeee33;
-	border: 1px solid yellow;
+.ball.yellow.current {
+	background: #ff0;
+	border: 1px solid #cc5;
 }
 
-.cell.pearl,
-.cell.ypearl {
+.pearl {
 	width: 12px;
 	height: 12px;
 	border-radius: 6px;
@@ -163,60 +164,48 @@ body {
 	background: lightgray;
 }
 
-.cell.ypearl {
+.cell.yellow {
 	background: yellow;
 }
 
-.cell.rspike,
-.cell.lspike,
-.cell.dspike,
-.cell.uspike,
-.cell.rwspike,
-.cell.lwspike,
-.cell.dwspike,
-.cell.uwspike,
+.ball.yellow {
+	background: #ee6;
+}
+
 .right,
 .left,
-.up,
-.down {
+.down,
+.up {
 	width: 0;
 	height: 0;
 	color: black;
 }
 
-.right,
-.cell.rspike,
-.cell.rwspike {
+.right {
 	border-bottom: 10px solid transparent;
 	border-top: 10px solid transparent;
 	border-left: 20px solid red;
 }
 
-.left,
-.cell.lspike,
-.cell.lwspike {
+.left {
 	border-bottom: 10px solid transparent;
 	border-top: 10px solid transparent;
 	border-right: 20px solid red;
 }
 
-.down,
-.cell.dspike,
-.cell.dwspike {
+.down{
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
 	border-top: 20px solid red;
 }
 
-.up,
-.cell.uspike,
-.cell.uwspike {
+.up {
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
 	border-bottom: 20px solid red;
 }
 
-.cell.mspike {
+.cell.x.spike {
 	width: 14px;
 	height: 14px;
 	margin: 3px;
@@ -226,26 +215,42 @@ body {
 	-moz-transform: rotate(45deg);
 }
 
-.cell.rwspike {
+.wooden.spike.right {
 	border-left-color: #c93;
 }
 
-.cell.lwspike {
+.wooden.spike.left {
 	border-right-color: #c93;
 }
 
-.cell.dwspike {
+.wooden.spike.down {
 	border-top-color: #c93;
 }
 
-.cell.uwspike {
+.wooden.spike.up {
 	border-bottom-color: #c93;
 }
 
-.left,
-.right,
-.down,
-.up {
+.rotating.spike.right {
+	border-left-color: #f70;
+}
+
+.rotating.spike.left {
+	border-right-color: #f70;
+}
+
+.rotating.spike.down {
+	border-top-color: #f70;
+}
+
+.rotating.spike.up {
+	border-bottom-color: #f70;
+}
+
+.solution .left,
+.solution .right,
+.solution .down,
+.solution .up {
 	display: inline-block;
 	margin: 2px;
 	position: relative;
@@ -265,7 +270,7 @@ body {
 	font-size: 16px;
 }
 
-.right {
+.solution .right {
 	border-left-color: white;
 }
 
@@ -274,7 +279,7 @@ body {
 	left: -20px;
 }
 
-.left {
+.solution .left {
 	border-right-color: white;
 }
 
@@ -282,7 +287,7 @@ body {
 	text-align: right;
 }
 
-.down {
+.solution .down {
 	border-top-color: white;
 }
 
@@ -292,7 +297,7 @@ body {
 	text-align: center;
 }
 
-.up {
+.solution .up {
 	border-bottom-color: white;
 }
 
@@ -302,7 +307,7 @@ body {
 	text-align: center;
 }
 
-.cell.box {
+.box {
 	width: 16px;
 	height: 16px;
 	margin: 2px;
@@ -310,7 +315,7 @@ body {
 	background: #c93;
 }
 
-.cell.bush {
+.bush {
 	width: 8px;
 	height: 8px;
 	margin: 6px;
@@ -318,10 +323,9 @@ body {
 	background: darkgreen;
 }
 
-.cell.wbush {
+.wall.bush {
 	width: 18px;
 	height: 18px;
 	margin: 1px;
 	border-radius: 1px;
-	background: darkgreen;
 }
