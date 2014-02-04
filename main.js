@@ -1,46 +1,48 @@
 define([
 	'jquery',
 	'core/keys',
+	'core/md5',
 	'./levels'
-], function ($, keys, levels) {
+], function ($, keys, md5, levels) {
 
 	'use strict';
 
 	var map = [
-			'empty',                //0
-			'wall',                 //1
-			'wall yellow',          //2
-			'bush',                 //3
-			'wall bush',            //4
-			'pearl',                //5
-			'yellow pearl',         //6
-			'ball',                 //7
-			'yellow ball',          //8
-			'red ball',             //9
-			'spike right',          //10
-			'spike left',           //11
-			'spike down',           //12
-			'spike up',             //13
-			'wooden spike right',   //14
-			'wooden spike left',    //15
-			'wooden spike down',    //16
-			'wooden spike up',      //17
-			'box',                  //18
-			'bush ball',            //19
-			'bush yellow ball',     //20
-			'ring',                 //21
-			'yellow ring',          //22
-			'x spike',              //23
-			'vacuum',               //24
-			'rotating spike right', //25
-			'rotating spike left',  //26
-			'rotating spike down',  //27
-			'rotating spike up',    //28
-			'tumbler',              //29
-			'tumbler ball',         //30
-			'tumbler yellow ball'   //31
-		],
-		data = levels[1974].II[3],
+			'empty',                //0  +
+			'box',                  //1  +
+			'wall yellow',          //2  +
+			'bush',                 //3  +
+			'wall bush',            //4  +
+			'pearl',                //5  +
+			'yellow pearl',         //6  +
+			'ball',                 //7  +
+			'yellow ball',          //8  +
+			'red ball',             //9  +
+			'rotating spike right', //10 +
+			'rotating spike left',  //11 +
+			'rotating spike down',  //12 +
+			'rotating spike up',    //13 +
+			'wooden spike right',   //14 +
+			'wooden spike left',    //15 +
+			'wooden spike down',    //16 +
+			'wooden spike up',      //17 +
+			'tumbler yellow ball',  //18 +
+			'bush ball',            //19 +
+			'bush yellow ball',     //20 +
+			'tumbler',              //21 +
+			'tumbler ball',         //22 +
+			'x spike',              //23 -
+			'vacuum',               //24 -
+			'spike right',          //25 -
+			'spike left',           //26 -
+			'spike down',           //27 -
+			'spike up',             //28 -
+			'ring',                 //29 -
+			'yellow ring',          //30 -
+			'wall'                  //31 -
+			//32 - 9 = 23
+		],// 1972 - 3 - 0
+		data = levels[1972].III[0],
 		field = data.field,
 		fieldWidth = data.width,
 		maxDepth = data.moves,
@@ -49,6 +51,8 @@ define([
 		maxVPath = fieldHeight * 3,
 		length = field.length,
 		balls = [],
+		mutable = [],
+		hashStorage = [],
 		build = function () {
 			var i, j,
 				cell,
@@ -79,6 +83,7 @@ define([
 			}
 		},
 		moves = 0,
+		unique = 0,
 		current,
 		setCurrent = function (i) {
 			current = i;
@@ -95,7 +100,7 @@ define([
 				while (--i) if (field[i] != tmp[i] && isBall(field[i]))
 					setCurrent(i);
 
-				$('.solution').find('.'+directions[direction]+':not(.spike)').first().addClass('rotating spike');
+				$('.solution').find('.' + directions[direction] + ':not(.spike)').first().addClass('rotating spike');
 
 				build();
 				$counter.html('Moves : ' + (++moves));
@@ -128,7 +133,10 @@ define([
 			}
 		},
 		isBall = function (cell) {
-			return cell == 7 || cell == 8 || cell == 19 || cell == 20 || cell == 30 || cell == 31;
+			return cell == 7 || cell == 8 || cell == 19 || cell == 20 || cell == 18 || cell == 22;
+		},
+		isMutable = function (cell) {
+			return cell < 23 && cell != 4;
 		},
 		findNextBall = function (index) {
 			var ball,
@@ -141,15 +149,29 @@ define([
 				balls.push(ball);
 			if ((ball = field.indexOf(20, index)) != -1)
 				balls.push(ball);
-			if ((ball = field.indexOf(30, index)) != -1)
+			if ((ball = field.indexOf(18, index)) != -1)
 				balls.push(ball);
-			if ((ball = field.indexOf(31, index)) != -1)
+			if ((ball = field.indexOf(22, index)) != -1)
 				balls.push(ball);
 			if (balls.length)
 				return Math.min.apply(Math, balls);
 			if (index)
 				return findNextBall(0);
 		},
+		fillMutable = function () {
+			mutable.length = 0;
+			var i;
+			for (i = 0; i < length; i++) {
+				if (isMutable(field[i])) {
+					mutable.push(i);
+				}
+			}
+//			if (mutable.length % 2) {
+//				mutable.push(0);
+//			}
+			mutableLength = mutable.length;
+		},
+		mutableLength = 0,
 		lastSpikeDirection,
 		move = function (field, index, direction) {
 			var pos = index,
@@ -177,25 +199,25 @@ define([
 					yellow = true;
 					field[pos] = 4;
 					break;
-				case 30:
+				case 22:
 					yellow = false;
-					field[pos] = 29;
+					field[pos] = 21;
 					for (i = 0; i < length; i++) {
 						j = field[i];
-						if (j == 25 || j == 26 || j == 27 || j == 28) {
+						if (j == 10 || j == 11 || j == 12 || j == 13) {
 							lastSpikeDirection = j;
-							field[i] = 25 + direction;
+							field[i] = 10 + direction;
 						}
 					}
 					break;
-				case 31:
+				case 18:
 					yellow = true;
-					field[pos] = 29;
+					field[pos] = 21;
 					for (i = 0; i < length; i++) {
 						j = field[i];
-						if (j == 25 || j == 26 || j == 27 || j == 28) {
+						if (j == 10 || j == 11 || j == 12 || j == 13) {
 							lastSpikeDirection = j;
-							field[i] = 25 + direction;
+							field[i] = 10 + direction;
 						}
 					}
 					break;
@@ -247,8 +269,12 @@ define([
 				}
 				switch (field[pos]) {
 					case 1:
-					case 4:
-						moving = false;
+						field[pos] = 0;
+						if (queue.length && queue[queue.length - 1] == 1) {
+							queue.pop();
+						} else {
+							queue.push(1);
+						}
 						break;
 					case 2:
 						if (yellow && !queue.length) {
@@ -276,6 +302,10 @@ define([
 							path = [];
 							alive = false;
 						}
+						break;
+					case 4:
+					case 31:
+						moving = false;
 						break;
 					case 5:
 						moving = false;
@@ -389,24 +419,6 @@ define([
 						}
 						queue.push(17);
 						break;
-					case 18:
-						field[pos] = 0;
-						if (queue.length && queue[queue.length - 1] == 18) {
-							queue.pop();
-						} else {
-							queue.push(18);
-						}
-						break;
-					case 21:
-						pos = field.indexOf(21, pos + 1);
-						if (pos == -1)
-							pos = field.indexOf(21);
-						break;
-					case 22:
-						pos = field.indexOf(22, pos + 1);
-						if (pos == -1)
-							pos = field.indexOf(22);
-						break;
 					case 23:
 						moving = false;
 						if (!queue.length) {
@@ -434,11 +446,21 @@ define([
 						} while (field[pos] != 24);
 						break;
 					case 29:
+						pos = field.indexOf(29, pos + 1);
+						if (pos == -1)
+							pos = field.indexOf(29);
+						break;
+					case 30:
+						pos = field.indexOf(30, pos + 1);
+						if (pos == -1)
+							pos = field.indexOf(30);
+						break;
+					case 21:
 						for (i = 0; i < length; i++) {
 							j = field[i];
-							if (j == 25 || j == 26 || j == 27 || j == 28) {
+							if (j == 10 || j == 11 || j == 12 || j == 13) {
 								lastSpikeDirection = j;
-								field[i] = 25 + direction;
+								field[i] = 10 + direction;
 							}
 						}
 						break;
@@ -458,26 +480,38 @@ define([
 					case 4:
 						field[pos] = yellow ? 20 : 19;
 						break;
-					case 29:
+					case 21:
 						for (i = 0; i < length; i++) {
 							j = field[i];
-							if (j == 25 || j == 26 || j == 27 || j == 28) {
+							if (j == 10 || j == 11 || j == 12 || j == 13) {
 								field[i] = lastSpikeDirection;
 							}
 						}
-						field[pos] = yellow ? 31 : 30;
+						field[pos] = yellow ? 18 : 22;
 						break;
 				}
 			}
 		},
 		directions = ['right', 'left', 'down', 'up'],
 		calculate = function (depth) {
+
+			fillMutable();
+
 			var time = new Date().getTime(),
 				i,
-				solution = solve(field, depth),
+				solution,
 				$solution = $('.solution').empty(),
 				tmp,
 				local = [];
+
+			hashStorage.length = 0;
+
+			for (i = 0; i <= depth; i++) {
+				hashStorage[i] = {};
+			}
+
+			solution = solve(field, depth);
+
 			fillBalls(balls, field);
 			if (solution) {
 				$solution.append('<div>' + (new Date().getTime() - time) + ' ms, ' + solution.length + ' moves</div>');
@@ -499,15 +533,35 @@ define([
 				$solution.html(new Date().getTime() - time);
 			}
 		},
+		hashMap = 'abcdefghigklmnopqrstuvwxyz'.split(''),
+		generateHash = function (field) {
+			var i, hash = '';
+			for (i = 0; i < mutableLength; i++) {
+				hash += hashMap[field[mutable[i]]];
+			}
+			return hash;
+		},
 		solve = function (field, depth) {
 			var i, j, l,
 				cell,
 				tmp,
-				best;
+				best,
+				hash;
+
 			if (depth) {
+				hash = generateHash(field);
+
+				for (i = depth; i < hashStorage.length; i++) {
+					if (hashStorage[i][hash]) {
+						return;
+					}
+				}
+
+				hashStorage[depth][hash] = true;
+
 				for (i = 0; i < length; i++) {
 					cell = field[i];
-					if (cell == 7 || cell == 8 || cell == 19 || cell == 20 || cell == 30 || cell == 31) {
+					if (cell == 7 || cell == 8 || cell == 19 || cell == 20 || cell == 18 || cell == 22) {
 						for (j = 0; j < 4; j++) {
 							tmp = field.slice(0);
 							if (move(tmp, i, j)) {
@@ -534,10 +588,11 @@ define([
 				return best;
 			}
 		},
-		$counter;
+		$counter,
+		$unique;
 
 	$('body').append('<div class="vertical-aligner"></div><div class="counter"></div><div class="solution"></div>');
-	$('.counter').append('<div>Target: ' + maxDepth + '</div>').append($counter = $('<div>'))
+	$('.counter').append('<div>Target: ' + maxDepth + '</div>').append($counter = $('<div>')).append($unique = $('<div>'));
 
 	keys.on({
 		right: function (val) {
@@ -554,7 +609,7 @@ define([
 		},
 		space: function (val) {
 			if (val)
-				calculate(maxDepth);
+				calculate(maxDepth - moves);
 		},
 		ctrl: function (val) {
 			if (val)
