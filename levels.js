@@ -477,15 +477,15 @@ define(function () {
 					width: 11,
 					moves: 14
 				},
-				{ // 2290*
+				{ // 170*
 					field: [
-						0, o, o, o, o, o, o, o, o, o, o, o, o, 0,
+						z, o, o, o, o, o, o, o, o, o, o, o, o, z,
 						o, d, o, 5, 2, 0, 0, 0, 0, o, o, o, o, o,
 						o, 0, 6, o, o, 0, 7, 3, 0, 3, 0, 0, o, o,
 						o, 0, 0, 9, 0, 0, 0, 0, 0, o, 0, m, 0, o,
 						o, 0, 0, o, 0, 0, 0, 0, 0, 3, 0, 0, 0, o,
 						o, u, o, o, 0, 0, o, 0, 7, o, o, o, o, o,
-						0, o, o, o, o, o, o, o, o, o, o, o, o, 0
+						z, o, o, o, o, o, o, o, o, o, o, o, o, z
 					],
 					width: 14,
 					moves: 21
@@ -705,7 +705,7 @@ define(function () {
 					width: 11,
 					moves: 13
 				},
-				{ // 27888 ms for 10 moves
+				{ // 506**
 					field: [
 						z, z, o, o, o, 0, 0, o, 0, o, 0, e, 0, o, z,
 						z, o, 5, o, 0, 0, 0, 0, o, o, 0, 0, 5, 0, o,
@@ -728,7 +728,7 @@ define(function () {
 					width: 13,
 					moves: 15
 				},
-				{ // 4151 ms for 15 moves
+				{ // 42**
 					field: [
 						0, 0, o, 0, 0, o, 0, 0, 0, 0, o, 0, 0, 0,
 						0, 6, 0, 0, 0, 0, 0, o, b, 0, 0, 0, o, o,
@@ -797,7 +797,7 @@ define(function () {
 				}
 			],
 			III: [
-				{ // 8572 for 17 moves
+				{ // 8572 for 17 moves // 8939* for 24 moves // 27600**
 					field: [
 						o, o, 0, 0, 0, o, o, o, o, o, o, o, o, 0, o, 0, o,
 						0, 5, 0, o, 0, 0, 0, 3, 3, 0, 0, 0, 5, 0, o, 0, 0,
@@ -1010,7 +1010,7 @@ define(function () {
 		},
 		1975: {
 			I: [
-				{ // 5999 for 2 balls
+				{ // 257**
 					field: [ // 33 ms
 						o, o, o, o, o, o, o, o, o, o, o, o,
 						0, 0, 0, 3, 0, 3, o, 0, 0, 0, 3, 0,
@@ -1023,8 +1023,8 @@ define(function () {
 					],
 					width: 12,
 					moves: 12
-				}, // 7
-				{ // 1899 for 18 moves
+				},
+				{ // 38**
 					field: [
 						0, o, 0, o, 0, 0, 0, 0, 0, 0, o, 0, 0, 0, 0,
 						0, o, 0, o, 0, o, o, o, 0, 0, o, o, o, o, 0,
@@ -1038,7 +1038,7 @@ define(function () {
 					width: 15,
 					moves: 22
 				},
-				{ // 38
+				{ // 22**
 					field: [
 						z, 3, 3, 3, 3, 5, z, 0, 0, o, 0, 0, z, g, z,
 						z, 3, 3, 3, 3, 3, z, 0, 0, 0, 0, o, z, 0, z,
