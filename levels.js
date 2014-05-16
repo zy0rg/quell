@@ -19,9 +19,25 @@ define(function () {
 		x = 23, // multi-spike
 		z = 24, // vacuum
 		a = 21, // tumbler
-		p = 32; // immutable
+		p = 32, // immutable
+		c = 33, // rose closed
+		h = 34; // rose open
 
 	return {
+		memento: {
+			field: [
+				o, o, o, o, 0, 0, 0, 0, 0, o, o, o, o, o, o,
+				0, 0, h, 0, 0, 9, 9, 7, 9, 5, 0, 0, o, 0, 0,
+				o, 3, o, o, o, 0, 0, 0, 0, 0, 7, 0, o, 7, o,
+				o, 0, 0, 0, m, 0, 0, 0, 0, 0, o, 0, o, 6, o,
+				2, 2, 2, 0, 0, 0, 0, o, o, 0, 0, 0, o, o, o,
+				2, 5, 2, 0, 0, 0, 0, 0, 0, 0, 0, o, z, z, o,
+				2, 2, 2, o, 0, 0, 0, 0, 0, o, o, o, z, z, o,
+				o, o, o, o, 0, 0, 0, 0, 0, o, o, o, o, o, o
+			],
+			width: 15,
+			moves: 17
+		},
 		1962: {
 			I: [
 				{ // 10

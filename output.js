@@ -38,7 +38,10 @@ define([
 			'spike up',             //28 -
 			'ring',                 //29 -
 			'yellow ring',          //30 -
-			'wall'                  //31 -
+			'wall',                 //31 -
+			'empty',                //32 -
+			'rose',                 //33 +
+			'rose open'             //34 +
 		],
 		current,
 		directions = ['right', 'left', 'down', 'up'],
@@ -151,7 +154,6 @@ define([
 			tmp,
 			local = [];
 
-		fillBalls(balls);
 		if (solution) {
 			$solution.append('<div>' + timespan + ' ms, ' + solution.length + ' moves</div>');
 			$solution.append($solution = $('<div>'));

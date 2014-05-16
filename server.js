@@ -18,7 +18,7 @@ stdin.addListener("data", function (data) {
 		console.log('solving...');
 		val = new Date().getTime();
 		i = calculator.calculate(level);
-		console.log((i ? i.length + ' moves' : 'not solved') + ', ' + (new Date().getTime() - val) + ' ms');
+		console.log((i ? i.length + ' moves' : 'not solved') + ', ' + (new Date().getTime() - val) + ' ms', i);
 	} else {
 		console.log('invalid input');
 	}

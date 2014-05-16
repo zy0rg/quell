@@ -314,6 +314,17 @@ define(function () {
 						}
 					}
 					break;
+				case 33:
+					field[pos] = 34;
+					moving = false;
+					break;
+				case 34:
+					field[pos] = 33;
+					moving = false;
+					if (!queue.length) {
+						alive = false;
+					}
+					break;
 			}
 		}
 		if (i = queue.length) {

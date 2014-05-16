@@ -5,7 +5,7 @@ define([
 	'calculator',
 	'core/keys'
 ], function (levels, field, output, calculator, keys) {
-	output.init(levels[1972].III[0]);
+	output.init(levels.memento);
 
 	keys.on({
 		right: function (val) {

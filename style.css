@@ -329,3 +329,19 @@ body {
 	margin: 1px;
 	border-radius: 1px;
 }
+
+.rose {
+	width: 14px;
+	height: 14px;
+	margin: 3px;
+	background: orange;
+	border-radius: 7px;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+}
+
+.rose.open {
+	background: red;
+	border-radius: 0;
+}

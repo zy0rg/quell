@@ -85,6 +85,27 @@ define([
 								[i, j]
 							];
 						} else {
+
+//							if (tmp[58] != 6) {
+//								j = 0;
+//								l = 0;
+//								for (i = 0; i < length; i++) {
+//									if (tmp[i] == 6 || tmp[i] == 8) {
+//										j++;
+//									}
+//									if (tmp[i] == 7) {
+//										l++;
+//									}
+//								}
+//								if (j == 4 && l == 1) {
+//									return [
+//										[i, j]
+//									];
+//								} else {
+//									return;
+//								}
+//							}
+
 							l = length;
 							while (--l) {
 								if (tmp[l] !== field[l]) break;
